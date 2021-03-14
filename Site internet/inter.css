@@ -1,0 +1,120 @@
+p
+{
+    font-family: Arial;
+}   
+
+
+p#bottom{
+    font-family: Arial;
+    font-size: 10px;
+    text-align: center;
+}
+
+
+p#title{
+    font-family: Arial;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+p#questions{
+    font-size: 15px;
+}
+
+p#menu{
+    font-size: 20px;
+    font-family: Arial;
+    font-weight: bold;
+}
+
+
+button {
+    font-size: 18px;
+    padding: 10px;
+    margin: 20px 0;
+    color: white;
+    border: 0;
+    border-radius: 10px;
+    border-bottom: 3px solid #333;
+  }
+  #submit {
+    background: gray;
+  }
+  #answer {
+    background: #eee;
+    padding: 10px;
+  }
+
+
+
+img {
+    float: left;
+    width: 100%;
+    height: 25vh;
+    object-fit: cover;
+  }
+
+.cover {
+    object-fit: cover;
+  }
+
+
+
+
+
+.container{
+    display:flex;
+    flex-direction:column;
+  }
+
+
+.wrapper-1 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap 
+    }
+    
+    
+    .menu {
+        text-align: left;
+        background-color: darkslategrey;
+        width: 20%;
+        min-width: 150px
+    }
+    
+    .main {
+    text-align: left;
+    background-color:whitesmoke;
+    order: 1;
+    flex: 1 5;
+    padding: 5%;
+    }
+
+
+
+.wrapper-2{
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    background-color:rgb(156, 155, 155)
+}
+    
+    .bottom-1 {
+        flex:1 1 0;
+        width:33%;
+        padding: 3% 3% 3%;
+    }
+    
+    .bottom-2 {
+        flex:1 1 0;
+        width:33%;
+        padding: 3% 3% 3%;
+    }
+
+    .bottom-3 {
+        flex:1 1 0;
+        width:33%;
+        padding: 3% 3% 3%;
+    }
+    
