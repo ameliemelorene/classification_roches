@@ -23,7 +23,7 @@ function tabulateAnswers(event) {
     } else if (lion == true) {
         typeroche = "Inès"
     } else if (raph == true){
-      typeroche = "Oulà ça je c'est Chloé"
+      typeroche = "Oulà ça je sais c'est Chloé"
     }
 
     if ((lion==true) && (cancer==true)){
