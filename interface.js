@@ -9,6 +9,7 @@ let gneiss= false
 let orientation = false
 let typeroche = "Réponds aux trois questions"
 
+
   if (document.getElementsByName('q1')[0].checked) {
     cristallized = true;
   }
@@ -58,5 +59,9 @@ let typeroche = "Réponds aux trois questions"
   }
 
   
-  document.getElementById("result").textContent = typeroche   
+  document.getElementById("result").textContent = typeroche  
+  document.getElementById("result").style.fontFamily = "Arial"
+  document.getElementById("result").style.fontSize = "13px"
+
+ 
 }
