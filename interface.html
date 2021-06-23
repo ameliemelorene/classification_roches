@@ -9,7 +9,7 @@
     <body>
         <div class = "container">
             <img class = "cover" 
-            src="https://i.ytimg.com/vi/tm9ZHrGv5ZQ/maxresdefault.jpg"/>
+            src="musee.jpg"/>
 
 
 
@@ -20,7 +20,7 @@
                 <br><a style="text-decoration:none; color:black" href="file:///C:/Users/inesf/Documents/Projet%20classement%20des%20roches/classification_roches/interface2.html">
                 Présentation du travail </a>
                 <br>
-                <br><a style="text-decoration:none; color:black" href="file:///C:/Users/inesf/Documents/Projet%20classement%20des%20roches/Interface_roches/interface.html">
+                <br><a style="text-decoration:none; color:black" href="file:///C:/Users/inesf/Documents/Projet%20classement%20des%20roches/classification_roches/interface.html">
                 Trouver le type de roche  </a> </p>
             </p>
 
@@ -50,13 +50,22 @@
             <br>
             <input type="radio" name="q3"> <label> Non <br> </label></input>
             <br>
+            
+
+            <p id= "questions"> Vous pouvez aussi déposer votre photo de roche. Attention, la photo doit uniquement contenir de la roche, pas de bordures. 
+                Elle doit également être sous le format .png</p>
+            <input type="file" id="avatar" name="avatar"accept="image/png">
+            <br >
             <button type="button" onclick="tabulateAnswers()"> Rechercher <span class="fa fa-search"></span> <br> </button>
             <br> 
-            <span id="result"> <label>Réponds aux trois questions </label></span>
+            <div id="result"></div>
+            <div id='result_algo'></div>
+
             </div>
+            
+            
+
         </div>
-
-
 
 
 
@@ -78,7 +87,7 @@
                     <li> <p id = bottom>Monsieur Gschwind</p></li>
                     <li> <p id = bottom>Monsieur Nectoux </p></li>
                     <li> <p id = bottom>Monsieur Denoux </p></li>
-                    <li> <p id = bottom>Matmaz parce qu'il est reponsable de notre bonheur  </p> </li>
+                    <li> <p id = bottom>L'ensemble du personnel du musée des Mines </p></li>
                 </ul>
             </p>
         </div>
@@ -88,7 +97,7 @@
                 <ul>  
                     <li> <p id = bottom>Centre technique de Matériaux Naturels de Construction
                     <br> <a id = "bottom" style="color:blue" href="http://www.ctmnc.fr/pages/cat_6.php">Site du CTMNC</a> </p></li>
-                    <li> <p id = bottom>kjijoj </li>
+                    <li> <p id = bottom> Le musée des Mines de Paris </li>
                 </ul>
             
             </p>
