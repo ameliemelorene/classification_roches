@@ -1,0 +1,33 @@
+<html>
+    <header>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+        <script>
+            window.addEventListener("DOMContentLoaded", (event) => {
+                var socket = io.connect("http://" + document.domain + ":" + location.port );//ouvrir dans le serveur
+            
+                button = document.getElementById("button")
+                button.onclick = function(){
+                    console.log('click');
+                    socket.emit("requete",{"image": 33});//ça doit etre un dictionnaire
+                }
+            
+                socket.on("reponse",function(data){
+                    div = document.getElementById("gateau");
+                    div.textContent=data["bonjour"];
+                })
+            })
+        </script>
+    </header>
+    <head>
+        <h1>toudi</h1>
+
+    </head>
+    <body>
+        <p><button type="button" id="button"> Rechercher <span class="fa fa-search"></span> <br> </button>
+            </p>
+            <div id="gateau"> </div>
+
+    </body>
+
+
+</html>
