@@ -50,14 +50,16 @@
             <br>
             <input type="radio" name="q3"> <label> Non <br> </label></input>
             <br>
-            
+            <button type="button" onclick="tabulateAnswers()"> Recherche questionnaire <span class="fa fa-search"></span> <br> </button>
+            <br> 
 
             <p id= "questions"> Vous pouvez aussi déposer votre photo de roche. Attention, la photo doit uniquement contenir de la roche, pas de bordures. 
                 Elle doit également être sous le format .png</p>
             <input type="file" id="avatar" name="avatar"accept="image/png">
             <br >
-            <button type="button" onclick="tabulateAnswers()"> Rechercher <span class="fa fa-search"></span> <br> </button>
-            <br> 
+            <button type="button" id="button_algo"> Recherche image <span class="fa fa-search"></span> <br> </button>
+            <br>
+            
             <div id="result"></div>
             <div id='result_algo'></div>
 
