@@ -6,7 +6,7 @@ socketio = SocketIO(app)
 
 @app.route('/')
 def index():
-    return render_template('interface.html')
+    return render_template('interface_web.html')
 
 @socketio.on("requete")
 def f(json):
