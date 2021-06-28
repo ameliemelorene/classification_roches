@@ -13,6 +13,22 @@ from statistics import mode
 import os
 import glob
 
+from flask import Flask, render_template
+from flask_socketio import SocketIO
+
+app = Flask(__name__)
+socketio = SocketIO(app)
+
+@app.route('/')
+def index():
+    return render_template('interface_web.html')
+
+@app.route('/i2')
+def i2():
+    return render_template('interface2_web.html')
+
+
+
 
 ##1. Lecture et redimensionnement de la photo
 
@@ -98,10 +114,11 @@ def rocks(number):
 
 ##3. Fonction finale
 
-def final_function(path):
+@socketio.on("requete")
+def final_function(json):
     print("loading...")
 
-    img = read_and_redim(path)
+    img = read_and_redim(json)
     img1, img2, img3, img4 = cut_in_four(img,256)
     list_img = [img1, img2, img3, img4]
 
@@ -116,5 +133,7 @@ def final_function(path):
         i += 1
     rock_number = mode(list_results)
 
-    return rocks(rock_number)
+    socketio.emit("reponse", {"type_roche" : rocks(rock_number)})
 
+if __name__=="__main__":
+    socketio.run(app, port=5001)
