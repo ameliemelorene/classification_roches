@@ -8,10 +8,15 @@ socketio = SocketIO(app)
 def index():
     return render_template('interface_web.html')
 
+@app.route('/i2')
+def i2():
+    return render_template('interface2_web.html')
+
 @socketio.on("requete")
 def f(json):
-    ima=json["image"]
-    socketio.emit("reponse", {"premier_pixel" : 33}) 
+    print(json)
+    ima=json["image_roche"]
+    socketio.emit("reponse", {"premier_pixel" : type(ima), "petit_test" : 22}) 
 
 if __name__=="__main__":
     socketio.run(app, port=5001)

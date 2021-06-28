@@ -4,7 +4,7 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
         <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href={{ url_for("static", filename="css/inter.css") }}>
+        <link rel="stylesheet" type="text/css" href={{ url_for("static", filename="inter.css") }}>
         <script>
             function tabulateAnswers(event) {
   console.log("CLICK", event)
@@ -112,14 +112,17 @@ let orientation = false
 window.addEventListener("DOMContentLoaded", (event) => {
   var socket = io.connect("http://" + document.domain + ":" + location.port );//ouvrir dans le serveur
 
+ var avatar = document.getElementById("avatar");
   button = document.getElementById("button_algo")
   button.onclick = function(){
-      console.log('click');
-      socket.emit("requete",{"image": avatar});//ça doit etre un dictionnaire
-  }
+  console.log("click")
+  console.log(JSON.stringify(avatar));
+  socket.emit("requete",{"image_roche": JSON.stringify(avatar)});
+  };//ça doit etre un dictionnaire
+  
 
   socket.on("reponse",function(data){
-      div = document.getElementById("result_algo");
+      div = document.getElementById("result_algo")
       div.textContent = 'D\'après la réponse de notre algorithme, la roche est ' 
     div.style.fontFamily = "Arial"
     div.style.fontSize = "18px"
@@ -127,8 +130,11 @@ window.addEventListener("DOMContentLoaded", (event) => {
     div.style.borderRadius = '10px'
     div.style.padding = '10px'
     div.style.textAlign = "center"
-      div.textContent+=data["premier_pixel"];
-  })
+      div.textContent+=data["premier_pixel"]
+      div.textContent+=data["petit_test"]
+    } 
+  )
+
 })
         </script>
     </head>
@@ -144,10 +150,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
         <div class= "menu">
             <p id = menu> <span class="fa fa-bars"></span> Menu
                 <br>
-                <br><a style="text-decoration:none; color:black" href="interface2.html">
+                <br><a style="text-decoration:none; color:black" href="/i2">
                 Présentation du travail </a>
                 <br>
-                <br><a style="text-decoration:none; color:black" href="interface.html">
+                <br><a style="text-decoration:none; color:black" href="/">
                 Trouver le type de roche  </a> </p>
             </p>
 
@@ -182,13 +188,14 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
             <p id= "questions"> Vous pouvez aussi déposer votre photo de roche. Attention, la photo doit uniquement contenir de la roche, pas de bordures. 
                 Elle doit également être sous le format .jpg</p>
-            <input type="file" id="avatar" name="avatar"accept="image/jpg">
+            <input type="file" id="avatar" name="avatar" accept="image/jpg">
             <br>
             <br >
             <button type="button" id="button_algo"> Recherche image <span class="fa fa-search"></span> <br> </button>
             <br>
             
             <div id="result"></div>
+            <br>
             <div id='result_algo'></div>
 
             </div>

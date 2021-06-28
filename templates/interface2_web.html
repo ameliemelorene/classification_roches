@@ -1,0 +1,206 @@
+<html> 
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+          <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <link rel="stylesheet" type="text/css" href={{ url_for("static", filename="inter.css") }}>
+          <script>
+              function tabulateAnswers(event) {
+    console.log("CLICK", event)
+  
+  
+    // Détermination du type de roche par réponse au questionnaire 
+  let cristallized = false  
+  let roundholes = false
+  let holes = false 
+  let schiste= false
+  let gneiss= false
+  let orientation = false
+  
+  
+  
+    if (document.getElementsByName('q1')[0].checked) {
+      cristallized = true;
+    }
+  
+    if (document.getElementsByName('q2')[0].checked) {
+        roundholes = true;
+    }
+  
+    if (document.getElementsByName('q2')[1].checked) {
+        holes = true;
+    }
+  
+    if (document.getElementsByName('q3')[0].checked) {
+        schiste = true;
+    }
+  
+    if (document.getElementsByName('q3')[1].checked) {
+      gneiss = true;
+    }
+  
+    if (document.getElementsByName('q3')[2].checked) {
+      orientation = true;
+    }
+  
+    if (roundholes == true) {
+      typeroche = "Roche magmatique volcanique : Basalte";
+    } else if (schiste == true) {
+      typeroche = "une roche sédimentaire : Schiste"
+    }else if (gneiss == true){
+      typeroche = "une roche métamorphique : Gneiss"
+    }else if(cristallized==true && holes==false && orientation==false){
+      typeroche= "une roche magmatique plutonique : Granite"
+    }else if(cristallized==true && orientation==true){
+      typeroche= "une roche métamorphique : Gneiss"
+    }else if (cristallized==true && holes==true &&orientation==false){
+        typeroche= "une roche sédimentaire : Gypse"
+    }else if(cristallized==true && holes==true && orientation==true){
+      typeroche= "une roche métamorphique : Gneiss"
+    }else if (orientation==true && holes==true){
+      typeroche="une roche sédimentaire : Marne"
+    }else if (orientation==true){
+      typeroche="une plus probablement une marne (schiste possible)"
+    }else if (holes==true && orientation==false){
+      typeroche="une roche sédimentaire : grès ou calcaire"
+    }else if (holes==false && orientation==false){
+      typeroche="probablement une roche sédimentaire : grès ou calcaire, observe mieux, elle comporte probablement quelques porosités"
+    }
+  
+    if (!document.getElementsByName('q1')[0].checked && !document.getElementsByName('q1')[1].checked 
+    && !document.getElementsByName('q2')[0].checked && !document.getElementsByName('q2')[1].checked && !document.getElementsByName('q2')[2].checked
+    && !document.getElementsByName('q3')[0].checked && !document.getElementsByName('q3')[1].checked && !document.getElementsByName('q3')[2].checked && !document.getElementsByName('q3')[3].checked){
+      typeroche = 'non connue'
+    }
+  
+  
+  
+  // Détermination du type de roche par analyse de photo
+    // var photo = document.getElementById('input')
+    // roche_algo = algo(photo)
+  
+  
+  
+    
+  // Affichage des résultats
+    if (!(typeroche == 'non connue')){
+      document.getElementById("result").textContent = 'D\'après la réponse au questionnaire, la roche est ' 
+      document.getElementById("result").textContent += typeroche
+      document.getElementById("result").style.fontFamily = "Arial"
+      document.getElementById("result").style.fontSize = "18px"
+      document.getElementById("result").style.backgroundColor = 'rgb(92, 148, 148)'
+      document.getElementById("result").style.borderRadius = '10px'
+      document.getElementById("result").style.padding = '10px'
+      document.getElementById("result").style.textAlign = "center"
+    }
+    
+    //if (!(roche_algo == 'non connue')){
+    // document.getElementById("result").textContent = 'D\'après l\'analyse de votre photo, la roche est ' 
+    // document.getElementById("result").textContent += roche_algo 
+    // document.getElementById("result").style.fontFamily = "Arial"
+    // document.getElementById("result").style.fontSize = "18px"
+    // document.getElementById("result").style.backgroundColor = 'rgb(92, 148, 148)'
+    // document.getElementById("result").style.borderRadius = '10px'
+    // document.getElementById("result").style.padding = '10px'
+    // document.getElementById("result").style.textAlign = "center"
+    // }
+    
+  }
+  
+  //partie sur la recherche de photo
+  window.addEventListener("DOMContentLoaded", (event) => {
+    var socket = io.connect("http://" + document.domain + ":" + location.port );//ouvrir dans le serveur
+  
+    button = document.getElementById("button_algo")
+    button.onclick = function(){
+        console.log('click');
+        socket.emit("requete",{"image": avatar});//ça doit etre un dictionnaire
+    }
+  
+    socket.on("reponse",function(data){
+        div = document.getElementById("result_algo");
+        div.textContent = 'D\'après la réponse de notre algorithme, la roche est ' 
+      div.style.fontFamily = "Arial"
+      div.style.fontSize = "18px"
+      div.style.backgroundColor = 'rgb(92, 148, 148)'
+      div.style.borderRadius = '10px'
+      div.style.padding = '10px'
+      div.style.textAlign = "center"
+        div.textContent+=data["premier_pixel"];
+    })
+  })
+          </script>
+      </head>
+    <body>
+        <div class = "container">
+            <img class = "cover" 
+            src="musee.jpg"/>
+
+
+
+        <div class = "wrapper-1"> 
+        <div class= "menu">
+            <p id = menu> <span class="fa fa-bars"></span> Menu
+                <br>
+                <br><a style="text-decoration:none; color:black" href="/i2">
+                Présentation du travail </a>
+                <br>
+                <br><a style="text-decoration:none; color:black" href="/">
+                Trouver le type de roche  </a> </p>
+            </p>
+
+        </div>
+
+        <div class = "main">
+            <p id = questions> Ici on vous explique comment on a construit l'algorithme et à 
+                quels types de roches on s'intéresse.
+                <br>
+
+                On a séléctionné que 7 types de roches A COMPLETER
+                <br>
+
+        </div>
+        </div>
+
+
+
+
+
+        <div class = "wrapper-2"> 
+        <div class = "bottom-1">
+            <p id = bottom>Ce travail est une collaboration de Pauline Delarue, Inès Fontaine, 
+                Amélie Iméror et Chloé Vogel</p> 
+                <p id= "bottom"> <i class="fa fa-graduation-cap"></i> Etudiantes à l'école Mines-Paristech <br>
+                60 Boulevard Saint-Michel <br>
+                75272 Paris <br> </p>
+
+        </div>
+
+        <div class = "bottom-2">
+            <p id = bottom>Plusieurs personnes nous ont aidées à réaliser ce site et nous tenons à les remercier:
+                <ul>  
+                    <li> <p id = bottom>Toute l'équipe d'enseignement informatique </p></li>
+                    <li> <p id = bottom>Monsieur Nectoux </p></li>
+                    <li> <p id = bottom>Monsieur Gschwind</p></li>
+                    <li> <p id = bottom>Monsieur Denoux </p></li>
+                    <li> <p id = bottom>L'ensemble du personnel du musée des Mines </p></li>
+                </ul>
+            </p>
+        </div>
+
+        <div class = "bottom-3">
+            <p id = bottom>Nos travaux ont été effectué grâce aux sources suivantes: 
+                <ul>  
+                    <li> <p id = bottom>Centre technique de Matériaux Naturels de Construction
+                    <br> <a id = "bottom" style="color:blue" href="http://www.ctmnc.fr/pages/cat_6.php">Site du CTMNC</a> </p></li>
+                    <li> <p id = bottom> Le musée des Mines de Paris </li>
+                </ul>
+            
+            </p>
+        </div>
+
+
+        </div>
+    </div>
+    </body>
+</html>
