@@ -114,11 +114,11 @@ def rocks(number):
 
 ##3. Fonction finale
 
-@socketio.on("requete")
-def final_function(json):
-    print("loading...")
 
-    img = read_and_redim(json['image_roche'])
+def final_function(path):
+    print("loading...")
+    
+    img = read_and_redim(path)
     img1, img2, img3, img4 = cut_in_four(img,256)
     list_img = [img1, img2, img3, img4]
 
@@ -127,13 +127,12 @@ def final_function(json):
     for image in list_img:
         print(i,"/ 4")
         image_np = np.asarray(image,dtype = float)
-        image_redim = picture_network(image_np) 
+        image_redim = picture_network(image_np)
         list_results.append(network_test(image_redim))
 
         i += 1
     rock_number = mode(list_results)
 
-    socketio.emit("reponse", {"type_roche" : rocks(rock_number)})
+    return rocks(rock_number)
 
-if __name__=="__main__":
-    socketio.run(app, port=5001)
+#print(final_function("6.jpg"))
