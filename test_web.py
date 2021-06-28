@@ -15,8 +15,9 @@ def i2():
 @socketio.on("requete")
 def f(json):
     print(json)
-    #ima=json["image_roche"]
-    socketio.emit("reponse", {"premier_pixel" : 'tchoin', "petit_test" : 22}) 
+    adresse=json["image_roche"]
+    adresse+='test'
+    socketio.emit("reponse", {"premier_pixel" : adresse, "petit_test" : 22}) 
 
 if __name__=="__main__":
     socketio.run(app, port=5001)
