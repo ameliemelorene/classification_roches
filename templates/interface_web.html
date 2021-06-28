@@ -112,12 +112,16 @@ let orientation = false
 window.addEventListener("DOMContentLoaded", (event) => {
   var socket = io.connect("http://" + document.domain + ":" + location.port );//ouvrir dans le serveur
 
- var avatar = document.getElementById("avatar");
+  let avatar="initialisation"
+  fraise=document.getElementById("adresse_tape")
+  fraise.onclick=function(){
+    avatar=document.getElementById("adresse").value
+  }  
+
   button = document.getElementById("button_algo")
   button.onclick = function(){
   console.log("click")
-  console.log(JSON.stringify(avatar));
-  socket.emit("requete",{"image_roche": JSON.stringify(avatar)});
+  socket.emit("requete",{"image_roche": avatar});
   };//ça doit etre un dictionnaire
   
 
@@ -187,8 +191,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
             <br> 
 
             <p id= "questions"> Vous pouvez aussi déposer votre photo de roche. Attention, la photo doit uniquement contenir de la roche, pas de bordures. 
-                Elle doit également être sous le format .jpg</p>
-            <input type="file" id="avatar" name="avatar" accept="image/jpg">
+                Il faut seulement écrire le lien où la photo est enregistrée sur votre ordinateur. Puis appuyez sur le bouton</p>
+              <input type="text" id="adresse" name="adresse">
+              <button type="button" id="adresse_tape"> <br> </button>
             <br>
             <br >
             <button type="button" id="button_algo"> Recherche image <span class="fa fa-search"></span> <br> </button>
