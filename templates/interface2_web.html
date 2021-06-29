@@ -151,12 +151,9 @@
         </div>
 
         <div class = "main">
-            <p id = questions> Ici on vous explique comment on a construit l'algorithme et à 
-                quels types de roches on s'intéresse.
-                <br>
-                <p><h2>Rockonnaissance</h2></p>
+                <p id= title>Rockonnaissance</p>
 
-                <p>Rockonnaissance est un algorithme qui vous permet d’identifier une roche. Pour cela, vous devrez répondre à des questions et / ou nous envoyer une photo de votre roche. Rockonnaissance ne peut reconnaitre que les roches de type :
+                <p id=questions >Rockonnaissance est un algorithme qui vous permet d’identifier une roche. Pour cela, vous devrez répondre à des questions et / ou nous envoyer une photo de votre roche. Rockonnaissance ne peut reconnaitre que les roches de type :
                   <br>  • Basalte
                   <br>  • Calcaire
                   <br>  • Gneiss
@@ -166,12 +163,14 @@
                   <br>  • Schiste
                   </p>
                 
-                <p><h4>En savoir plus : </h4>
-                <h3>Comment l’algorithme a-t-il été construit ?</h3><br>
+                <p id= questions ><b>En savoir plus : </b><br>
+                  <br>
+                <b>Comment l’algorithme a-t-il été construit ?</b><br>
                 L’algorithme utilisé par Rockonnaisance est un algorithme de machine Learning. Grâce à de nombreuses photographies de roches, l’algorithme a extrait des informations propres à chaque roche. Ainsi, lorsqu’il reçoit une nouvelle photographie de roche, il peut maintenant identifier ces caractéristiques et donc reconnaitre de quel type de roche il s’agit. 
-                En l’occurrence, l’algorithme utilisé est un réseau neuronal convolutif. Son fonctionnement dépend de nombreux paramètres. Ainsi, de nombreux tests ont été effectué en faisant varier à chaque fois ces paramètres dans le but d’obtenir les meilleurs résultats possibles. Chaque test a pris environ deux heures. Il a notamment fallu être vigilant à ne pas faire de surapprentissage, c’est-à-dire, à ne pas avoir un algorithme fonctionnant très bien sur les données d’entrainement mais ne fonctionnant pas sur de nouvelles photographies. Ces recherches ont finalement abouti à l’algorithme utilisable dans la section « Trouver le type de roche ». 
+                <br>En l’occurrence, l’algorithme utilisé est un réseau neuronal convolutif. Son fonctionnement dépend de nombreux paramètres. Ainsi, de nombreux tests ont été effectué en faisant varier à chaque fois ces paramètres dans le but d’obtenir les meilleurs résultats possibles. Chaque test a pris environ deux heures. Il a notamment fallu être vigilant à ne pas faire de surapprentissage, c’est-à-dire, à ne pas avoir un algorithme fonctionnant très bien sur les données d’entrainement mais ne fonctionnant pas sur de nouvelles photographies. Ces recherches ont finalement abouti à l’algorithme utilisable dans la section « Trouver le type de roche ». 
                 <br>
-                <h3>Comment la base de données a été construite ?</h3><br>
+                <br>
+                <b>Comment la base de données a été construite ?</b><br>
                 La base de données a été créée grâce à des photographies prises dans le musée de Minéralogie des Mines de Paris. Environ 200 photographies y ont été faites et ont ensuite été recadrées. Cependant, cela n’était pas suffisant pour faire fonctionner l’algorithme. Les photographies ont donc été dérivées. Cela signifie que la luminosité, orientation et miroitement ont été modifiés afin de créer de nouvelles photographies. Cependant, un certain type de roche ne présentait toujours pas assez de photographies (marne), il a donc été décidé de le retirer. 
                 <br></p>
 
